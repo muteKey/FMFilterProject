@@ -9,6 +9,7 @@
 #import "FMFilterViewController.h"
 #import "FMFilterAdjustingProtocol.h"
 #import "FMFilterModel.h"
+#import "FMFilterCollectionCell.h"
 
 @interface FMFilterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -51,25 +52,142 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
                                   kFirstAttributeName   : @"Opacity",
                                   kSecondAttributeName  : @"Vignette Radius",
                                   kFirstValue           : @(0.5),
+                                  kSecondValue          : @(0.2)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterGrayscale",
+                                  kDisplayName          : @"Grayscale",
+                                  kFirstAttributeName   : @"Intensity",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterGrunge",
+                                  kDisplayName          : @"Grunge",
+                                  kFirstAttributeName   : @"Opacity",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterStars",
+                                  kDisplayName          : @"Stars",
+                                  kFirstAttributeName   : @"Opacity",
+                                  kSecondAttributeName  : @"Hue",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0.4)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterColorFlare",
+                                  kDisplayName          : @"Color Flare",
+                                  kFirstAttributeName   : @"Opacity",
+                                  kSecondAttributeName  : @"Vignette Radius",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterRedColorSplash",
+                                  kDisplayName          : @"Red Color Splash",
+                                  },
+
+                                @{kFilterName           : @"FMFilterGreenColorSplash",
+                                  kDisplayName          : @"Green Color Splash",
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterBlueScreenSplash",
+                                  kDisplayName          : @"Blue Color Splash",
+                                  },
+
+                                @{kFilterName           : @"FMFilterDazedAndConfused",
+                                  kDisplayName          : @"Dazed and Confused",
+                                  kFirstAttributeName   : @"Threshold",
+                                  kSecondAttributeName  : @"Blur Radius",
+                                  kFirstValue           : @(0.2),
                                   kSecondValue          : @(-1)
                                   },
                                 
-                                @{kFilterName           : @"FMFilterStripes",
-                                  kDisplayName          : @"Stripes",
-                                  kFirstAttributeName   : @"Opacity",
-                                  kSecondAttributeName  : @"Intensity",
-                                  kFirstValue           : @(0.5),
-                                  kSecondValue          : @(0.8)
+                                @{kFilterName           : @"FMFilterSuperExposed",
+                                  kDisplayName          : @"Super Exposed",
+                                  kFirstAttributeName   : @"SMTH",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(-1)
+                                  },
+
+                                @{kFilterName           : @"FMFilterDazedAndConfused",
+                                  kDisplayName          : @"Dazed and Confused",
+                                  kFirstAttributeName   : @"Threshold",
+                                  kSecondAttributeName  : @"Blur Radius",
+                                  kFirstValue           : @(0.4),
+                                  kSecondValue          : @(0.3)
                                   },
                                 
                                 @{kFilterName           : @"FMFilterPolkaDot",
                                   kDisplayName          : @"Polka Dot",
                                   kFirstAttributeName   : @"Pixel Size",
                                   kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterHalfTone",
+                                  kDisplayName          : @"Half Tone",
+                                  kFirstAttributeName   : @"Pixel Size",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0)
+                                  },
+
+                                @{kFilterName           : @"FMFilterSobelEdge",
+                                  kDisplayName          : @"Sobel Edge",
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterCartoon",
+                                  kDisplayName          : @"Cartoon",
+                                  kFirstAttributeName   : @"Blur Raduis",
+                                  kSecondAttributeName  : @"Quantization",
+                                  kFirstValue           : @(0.2),
                                   kSecondValue          : @(-1)
+                                  },
+
+                                @{kFilterName           : @"FMFilterEmboss",
+                                  kDisplayName          : @"Emboss",
+                                  kFirstAttributeName   : @"Depth",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(-1)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterGaussianBlur",
+                                  kDisplayName          : @"Gaussian Blur",
+                                  kFirstAttributeName   : @"Radius",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(-1)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterFishEye",
+                                  kDisplayName          : @"Fish Eye",
+                                  kFirstAttributeName   : @"Radius",
+                                  kSecondAttributeName  : @"Scale",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(-1)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterStretch",
+                                  kDisplayName          : @"Stretch",
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterWhiteScreen",
+                                  kDisplayName          : @"White Screen",
+                                  kFirstAttributeName   : @"Smoothing",
+                                  kFirstValue           : @(0.2),
+                                  kSecondValue          : @(0)
+                                  },
+                                
+                                @{kFilterName           : @"FMFilterGreenScreen",
+                                  kDisplayName          : @"Green Screen",
+                                  kFirstAttributeName   : @"Threshold",
+                                  kSecondAttributeName  : @"Hue",
+                                  kFirstValue           : @(0.4),
+                                  kSecondValue          : @(0.2)
                                   }
-                                
-                                
+
+
                                ];
     self.currentSelectedIndex = -1;
     [self createFiltersWithArray: filtersInfo];
@@ -117,32 +235,11 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
                   cellForItemAtIndexPath: (NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"collectionCell";
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: cellIdentifier
+    FMFilterCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: cellIdentifier
                                                                            forIndexPath: indexPath];
     
-    if (!cell)
-    {
-        cell = [[UICollectionViewCell alloc] init];
-    }
-    
     FMFilterModel* model = self.data[indexPath.row];
-    CGSize size;
-    if ([UIDevice currentDevice].systemVersion.floatValue <= 7.0)
-    {
-        size = [model.displayName sizeWithFont: [UIFont fontWithName: @"HelveticaNeue"
-                                                                size: 16]];
-    }
-    else
-    {
-        size = [model.displayName sizeWithAttributes: @{ NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue"
-                                                                                             size: 16]
-                                                        }];
-    }
-    
-    UILabel *text = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, size.width, size.height)];
-    text.text = model.displayName;
-    
-    [cell.contentView addSubview: text];
+    [cell setText: model.displayName];
     
     return cell;
 }
@@ -161,6 +258,16 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
         
         self.imageView.image = [filter imageByFilteringImage: self.originalImage];
         
+        if (!model.attribute1Name)
+        {
+            self.slider1.enabled = NO;
+        }
+        else
+        {
+            self.slider1.enabled = YES;
+            self.slider1.value = model.attribute1DefaultValue;
+        }
+        
         self.firstSliderTitle.text  = model.attribute1Name;
         
         if (!model.attribute2Name)
@@ -170,6 +277,7 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
         else
         {
             self.slider2.enabled = YES;
+            self.slider2.value = model.attribute2DefaultValue;
         }
         
         self.secondSliderTilte.text = model.attribute2Name;

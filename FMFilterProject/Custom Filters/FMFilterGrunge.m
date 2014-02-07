@@ -28,12 +28,11 @@
         self.overlay = [[GPUImageOverlayBlendFilter alloc] init];
         [self.overlayImage addTarget: self.overlay
               atTextureLocation: 1];
+        [self.overlayImage processImage];
         
-        [self addFilter: self.overlay];
         [self setInitialFilters: @[self.overlay]];
         [self setTerminalFilter: self.overlay];
-        
-        [self.overlayImage processImage];
+
     }
     
     return self;
@@ -43,7 +42,7 @@
 
 - (void)updateFirstFilterWithValue:(CGFloat)updateValue
 {
-    
+    // opacity
 }
 
 - (void)updateSecondFilterWithValues:(CGFloat)updateValue

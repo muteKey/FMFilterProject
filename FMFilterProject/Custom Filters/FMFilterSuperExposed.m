@@ -35,7 +35,7 @@
 
 - (void)updateFirstFilterWithValue:(CGFloat)updateValue
 {
-    self.exposureFilter.exposure = updateValue - 5.0;
+    self.exposureFilter.exposure = updateValue;// - 5.0;
 }
 
 - (void)updateSecondFilterWithValues:(CGFloat)updateValue

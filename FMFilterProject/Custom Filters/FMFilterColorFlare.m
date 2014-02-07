@@ -11,6 +11,8 @@
 @interface FMFilterColorFlare ()
 
 @property (nonatomic, strong) GPUImageVignetteFilter *vignetteFilter;
+@property (nonatomic, strong) GPUImagePicture *overlayImage;
+
 
 @end
 
@@ -20,21 +22,20 @@
 {
     if (self = [super init])
     {
-        UIImage *image                       = [UIImage imageNamed:@"colorflare"];
-        GPUImagePicture * overlayImage       = [[GPUImagePicture alloc] initWithImage: image
-                                                                  smoothlyScaleOutput: YES];
+        UIImage *image          = [UIImage imageNamed:@"colorflare"];
+        self.overlayImage       = [[GPUImagePicture alloc] initWithImage: image
+                                                     smoothlyScaleOutput: YES];
         
         GPUImageOverlayBlendFilter * overlay = [[GPUImageOverlayBlendFilter alloc] init];
-        [overlayImage addTarget: overlay
-              atTextureLocation: 1];
-        [overlayImage processImage];
-        
+        [self.overlayImage addTarget: overlay
+                   atTextureLocation: 1];
+        [self.overlayImage processImage];
+
         self.vignetteFilter = [[GPUImageVignetteFilter alloc] init];
         
-        [self addFilter: overlay];
-        [self addFilter: self.vignetteFilter];
-
-        [self setInitialFilters: @[overlay, self.vignetteFilter]];
+        [self.vignetteFilter addTarget: overlay];
+        
+        [self setInitialFilters: @[self.vignetteFilter]];
         [self setTerminalFilter: overlay];
     }
     
@@ -51,6 +52,7 @@
 - (void)updateSecondFilterWithValues:(CGFloat)updateValue
 {
     self.vignetteFilter.vignetteEnd = updateValue;
+    [self.overlayImage processImage];
 }
 
 @end

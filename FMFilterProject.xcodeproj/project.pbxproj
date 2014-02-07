@@ -27,6 +27,9 @@
 		6350839018A3D88300CFB070 /* FMFilterStretch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6350838F18A3D88300CFB070 /* FMFilterStretch.m */; };
 		6350839718A3DFCB00CFB070 /* FMFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6350839618A3DFCB00CFB070 /* FMFilterModel.m */; };
 		635B8BE818A504BA001B6A87 /* MCColorConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B8BE718A504BA001B6A87 /* MCColorConversions.m */; };
+		635B8BEC18A524AE001B6A87 /* FMFilterCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B8BEB18A524AE001B6A87 /* FMFilterCollectionCell.m */; };
+		635B8BF318A5432E001B6A87 /* FMFilterWhiteScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B8BF218A5432E001B6A87 /* FMFilterWhiteScreen.m */; };
+		635B8BF618A547D7001B6A87 /* FMFilterGreenScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B8BF518A547D7001B6A87 /* FMFilterGreenScreen.m */; };
 		63B0D38C18A3B1B2009CAED3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B0D38B18A3B1B2009CAED3 /* Foundation.framework */; };
 		63B0D38E18A3B1B2009CAED3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B0D38D18A3B1B2009CAED3 /* CoreGraphics.framework */; };
 		63B0D39018A3B1B2009CAED3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B0D38F18A3B1B2009CAED3 /* UIKit.framework */; };
@@ -421,6 +424,12 @@
 		6350839818A3E41300CFB070 /* FMFilterAdjustingProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMFilterAdjustingProtocol.h; sourceTree = "<group>"; };
 		635B8BE618A504BA001B6A87 /* MCColorConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCColorConversions.h; sourceTree = "<group>"; };
 		635B8BE718A504BA001B6A87 /* MCColorConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCColorConversions.m; sourceTree = "<group>"; };
+		635B8BEA18A524AE001B6A87 /* FMFilterCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFilterCollectionCell.h; sourceTree = "<group>"; };
+		635B8BEB18A524AE001B6A87 /* FMFilterCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFilterCollectionCell.m; sourceTree = "<group>"; };
+		635B8BF118A5432E001B6A87 /* FMFilterWhiteScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFilterWhiteScreen.h; sourceTree = "<group>"; };
+		635B8BF218A5432E001B6A87 /* FMFilterWhiteScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFilterWhiteScreen.m; sourceTree = "<group>"; };
+		635B8BF418A547D7001B6A87 /* FMFilterGreenScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFilterGreenScreen.h; sourceTree = "<group>"; };
+		635B8BF518A547D7001B6A87 /* FMFilterGreenScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFilterGreenScreen.m; sourceTree = "<group>"; };
 		63B0D38818A3B1B2009CAED3 /* FMFilterProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FMFilterProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B0D38B18A3B1B2009CAED3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		63B0D38D18A3B1B2009CAED3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -974,6 +983,15 @@
 			path = ColorConversions;
 			sourceTree = "<group>";
 		};
+		635B8BE918A52435001B6A87 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				635B8BEA18A524AE001B6A87 /* FMFilterCollectionCell.h */,
+				635B8BEB18A524AE001B6A87 /* FMFilterCollectionCell.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		63B0D37F18A3B1B2009CAED3 = {
 			isa = PBXGroup;
 			children = (
@@ -1007,6 +1025,7 @@
 		63B0D39118A3B1B2009CAED3 /* FMFilterProject */ = {
 			isa = PBXGroup;
 			children = (
+				635B8BE918A52435001B6A87 /* UI */,
 				635B8BE418A504BA001B6A87 /* External */,
 				63B0D5CB18A3B283009CAED3 /* images */,
 				63B0D5C718A3B263009CAED3 /* Custom Filters */,
@@ -1432,6 +1451,10 @@
 				6350838C18A3D59200CFB070 /* FMFilterFishEye.m */,
 				6350838E18A3D88300CFB070 /* FMFilterStretch.h */,
 				6350838F18A3D88300CFB070 /* FMFilterStretch.m */,
+				635B8BF118A5432E001B6A87 /* FMFilterWhiteScreen.h */,
+				635B8BF218A5432E001B6A87 /* FMFilterWhiteScreen.m */,
+				635B8BF418A547D7001B6A87 /* FMFilterGreenScreen.h */,
+				635B8BF518A547D7001B6A87 /* FMFilterGreenScreen.m */,
 			);
 			path = "Custom Filters";
 			sourceTree = "<group>";
@@ -1924,8 +1947,10 @@
 				63B0D5B318A3B206009CAED3 /* GPUImageUIElement.m in Sources */,
 				63B0D57418A3B206009CAED3 /* GPUImageMosaicFilter.m in Sources */,
 				63B0D54218A3B206009CAED3 /* GPUImageDissolveBlendFilter.m in Sources */,
+				635B8BEC18A524AE001B6A87 /* FMFilterCollectionCell.m in Sources */,
 				6350837118A3CEA600CFB070 /* FMFilterSuperExposed.m in Sources */,
 				63B0D53F18A3B206009CAED3 /* GPUImageDilationFilter.m in Sources */,
+				635B8BF318A5432E001B6A87 /* FMFilterWhiteScreen.m in Sources */,
 				63B0D5B218A3B206009CAED3 /* GPUImageTwoPassTextureSamplingFilter.m in Sources */,
 				6350837818A3D2F000CFB070 /* FMFilterPolkaDot.m in Sources */,
 				63B0D5BB18A3B206009CAED3 /* GPUImageZoomBlurFilter.m in Sources */,
@@ -2008,6 +2033,7 @@
 				6350835F18A3BA7C00CFB070 /* FMFilterColorFlare.m in Sources */,
 				63B0D57D18A3B206009CAED3 /* GPUImageOpacityFilter.m in Sources */,
 				6350838718A3D4EA00CFB070 /* FMFilterEmboss.m in Sources */,
+				635B8BF618A547D7001B6A87 /* FMFilterGreenScreen.m in Sources */,
 				63B0D5B718A3B206009CAED3 /* GPUImageVoronoiConsumerFilter.m in Sources */,
 				63B0D56618A3B206009CAED3 /* GPUImageLightenBlendFilter.m in Sources */,
 				63B0D5BE18A3B207009CAED3 /* GPUImagePicture.m in Sources */,

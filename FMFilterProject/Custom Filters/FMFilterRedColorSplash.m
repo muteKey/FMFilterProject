@@ -20,10 +20,12 @@
         GPUImageLookupFilter *lookUpFilter = [[GPUImageLookupFilter alloc] init];
         [overlayImage addTarget: lookUpFilter
               atTextureLocation: 1];
-        [overlayImage processImage];
         
         [self setInitialFilters: @[lookUpFilter]];
         [self setTerminalFilter: lookUpFilter];
+        
+        [overlayImage processImage];
+
     }
     
     return self;

@@ -12,7 +12,7 @@
 @interface FMFilterStars ()
 
 @property (nonatomic, strong)GPUImagePicture *overlayImage;
-@property (nonatomic, strong) GPUImageMonochromeFilter *monochromeFilter;
+@property (nonatomic, strong)GPUImageMonochromeFilter *monochromeFilter;
 
 @end
 
@@ -29,18 +29,17 @@
         GPUImageOverlayBlendFilter * overlay = [[GPUImageOverlayBlendFilter alloc] init];
         
         [self.overlayImage addTarget: overlay
-              atTextureLocation: 1];
+                   atTextureLocation: 1];
+        [self.overlayImage processImage];
 
         self.monochromeFilter = [[GPUImageMonochromeFilter alloc] init];
         [self.monochromeFilter setIntensity: 0.8];
+        [self.monochromeFilter addTarget: overlay];
         
-        [self addFilter: overlay];
         [self addFilter: self.monochromeFilter];
         
-        [self setInitialFilters: @[overlay, self.monochromeFilter]];
+        [self setInitialFilters: @[self.monochromeFilter]];
         [self setTerminalFilter: overlay];
-        
-        [self.overlayImage processImage];
     }
 
     return self;
@@ -62,6 +61,8 @@
                                                 [rgbArray[1] floatValue],
                                                 [rgbArray[2] floatValue],
                                                 1.0f};
+    [self.monochromeFilter setIntensity: 0.8];
+    [self.overlayImage processImage];
 }
 
 @end

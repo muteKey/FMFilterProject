@@ -30,6 +30,7 @@
 }
 
 #pragma mark - adjusting -
+
 - (void)updateFirstFilterWithValue: (CGFloat)updateValue
 {
     // no adjusting for this filter

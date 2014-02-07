@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) GPUImageVignetteFilter     *vignetteFilter;
 @property (nonatomic, strong) GPUImageOverlayBlendFilter *overlay;
-@property (nonatomic, strong) GPUImageOpacityFilter *opacityFilter;
 @property (nonatomic, strong) GPUImagePicture * overlayImage;
 @end
 
@@ -27,26 +26,21 @@
         self.overlayImage = [[GPUImagePicture alloc] initWithImage: image
                                                             smoothlyScaleOutput: YES];
         
-        self.opacityFilter  = [[GPUImageOpacityFilter alloc] init];
-        self.vignetteFilter = [[GPUImageVignetteFilter alloc] init];
-        self.overlay        = [[GPUImageOverlayBlendFilter alloc] init];
-        
-        self.opacityFilter.opacity = 1.0;
+        self.overlay      = [[GPUImageOverlayBlendFilter alloc] init];
+
 
         [self.overlayImage addTarget: self.overlay
                    atTextureLocation: 1];
-        
-        [self.overlayImage addTarget: self.opacityFilter];
-        
-        
-        [self addFilter: self.overlay];
-        [self addFilter: self.vignetteFilter];
-        [self addFilter: self.opacityFilter];
-        
-        [self setInitialFilters: @[self.overlay, self.vignetteFilter,self.opacityFilter]];
-        [self setTerminalFilter: self.vignetteFilter];
-        
         [self.overlayImage processImage];
+
+        self.vignetteFilter = [[GPUImageVignetteFilter alloc] init];
+        
+        [self.vignetteFilter addTarget: self.overlay];
+        [self addFilter: self.vignetteFilter];
+        
+        [self setInitialFilters: @[self.vignetteFilter]];
+        [self setTerminalFilter: self.overlay];
+        
     }
     
     return self;
@@ -56,7 +50,6 @@
 
 - (void)updateFirstFilterWithValue:(CGFloat)updateValue
 {
-    self.opacityFilter.opacity = updateValue;
     [self.overlayImage processImage];
 }
 

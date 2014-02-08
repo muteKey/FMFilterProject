@@ -22,16 +22,15 @@
 {
     if (self = [super init])
     {
-        self.lowPassFilter = [[GPUImageLowPassFilter alloc] init];
-        [self.lowPassFilter setFilterStrength: 0.4];
+//            commened due to https://github.com/BradLarson/GPUImage/issues/793
+        
+//        self.lowPassFilter = [[GPUImageLowPassFilter alloc] init];
+//        [self.lowPassFilter setFilterStrength: 0.4];
         
         self.selectiveBlurFilter = [[GPUImageGaussianSelectiveBlurFilter alloc] init];
         [self.selectiveBlurFilter setExcludeCircleRadius: 0.3];
         
-        [self addFilter: self.lowPassFilter];
-        [self addFilter: self.selectiveBlurFilter];
-        
-        [self setInitialFilters: @[self.lowPassFilter, self.selectiveBlurFilter]];
+        [self setInitialFilters: @[self.selectiveBlurFilter]];
         [self setTerminalFilter: self.selectiveBlurFilter];
     }
     
@@ -42,7 +41,7 @@
 
 - (void)updateFirstFilterWithValue:(CGFloat)updateValue
 {
-    self.lowPassFilter.filterStrength = updateValue;
+//    self.lowPassFilter.filterStrength = updateValue;
 }
 
 - (void)updateSecondFilterWithValues:(CGFloat)updateValue

@@ -8,23 +8,29 @@
 
 #import "FMFilterBlueScreenSplash.h"
 
+@interface FMFilterBlueScreenSplash ()
+
+@property (nonatomic, strong) GPUImagePicture *overlayImage;
+
+
+@end
+
 @implementation FMFilterBlueScreenSplash
 - (id)init
 {
     if (self = [super init])
     {
         UIImage *image = [UIImage imageNamed:@"lookup_blue"];
-        GPUImagePicture * overlayImage = [[GPUImagePicture alloc] initWithImage: image
+        self.overlayImage = [[GPUImagePicture alloc] initWithImage: image
                                                             smoothlyScaleOutput: YES];
         
         GPUImageLookupFilter *lookUpFilter = [[GPUImageLookupFilter alloc] init];
-        [overlayImage addTarget: lookUpFilter
+        [self.overlayImage addTarget: lookUpFilter
               atTextureLocation: 1];
-        
+        [self.overlayImage processImage];
+
         [self setInitialFilters: @[lookUpFilter]];
         [self setTerminalFilter: lookUpFilter];
-        
-        [overlayImage processImage];
     }
     
     return self;

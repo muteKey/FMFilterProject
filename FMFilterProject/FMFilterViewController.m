@@ -96,14 +96,6 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
                                 @{kFilterName           : @"FMFilterBlueScreenSplash",
                                   kDisplayName          : @"Blue Color Splash",
                                   },
-
-                                @{kFilterName           : @"FMFilterDazedAndConfused",
-                                  kDisplayName          : @"Dazed and Confused",
-                                  kFirstAttributeName   : @"Threshold",
-                                  kSecondAttributeName  : @"Blur Radius",
-                                  kFirstValue           : @(0.2),
-                                  kSecondValue          : @(-1)
-                                  },
                                 
                                 @{kFilterName           : @"FMFilterSuperExposed",
                                   kDisplayName          : @"Super Exposed",

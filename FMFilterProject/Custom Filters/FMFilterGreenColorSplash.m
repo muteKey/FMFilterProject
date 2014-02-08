@@ -8,6 +8,12 @@
 
 #import "FMFilterGreenColorSplash.h"
 
+@interface FMFilterGreenColorSplash ()
+
+@property (nonatomic, strong) GPUImagePicture *overlayImage;
+
+@end
+
 @implementation FMFilterGreenColorSplash
 
 - (id)init
@@ -15,13 +21,13 @@
     if (self = [super init])
     {
         UIImage *image = [UIImage imageNamed:@"lookup_green"];
-        GPUImagePicture * overlayImage = [[GPUImagePicture alloc] initWithImage: image
-                                                            smoothlyScaleOutput: YES];
+        self.overlayImage = [[GPUImagePicture alloc] initWithImage: image];
         
         GPUImageLookupFilter *lookUpFilter = [[GPUImageLookupFilter alloc] init];
-        [overlayImage addTarget: lookUpFilter
+        [self.overlayImage addTarget: lookUpFilter
               atTextureLocation: 1];
-        [overlayImage processImage];
+        
+        [self.overlayImage processImage];
         
         [self setInitialFilters: @[lookUpFilter]];
         [self setTerminalFilter: lookUpFilter];

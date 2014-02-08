@@ -39,8 +39,6 @@
         
         [self setInitialFilters: @[self.blendFilter]];
         [self setTerminalFilter: self.blendFilter];
-        
-
     }
     
     return self;

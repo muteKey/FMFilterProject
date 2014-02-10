@@ -11,9 +11,8 @@
 @interface FMFilterCracks ()
 
 @property (nonatomic, strong) GPUImageVignetteFilter     *vignetteFilter;
-@property (nonatomic, strong) GPUImageOverlayBlendFilter *overlay;
-@property (nonatomic, strong) GPUImagePicture *overlayImage;
-@property (nonatomic, strong) GPUImageOpacityFilter *opacityFilter;
+@property (nonatomic, strong) GPUImagePicture            *overlayImage;
+@property (nonatomic, strong) GPUImageOpacityFilter      *opacityFilter;
 
 @end
 
@@ -28,26 +27,23 @@
         self.overlayImage = [[GPUImagePicture alloc] initWithImage: image
                                                             smoothlyScaleOutput: YES];
         
-        self.overlay      = [[GPUImageOverlayBlendFilter alloc] init];
+        GPUImageOverlayBlendFilter *overlay = [[GPUImageOverlayBlendFilter alloc] init];
 
-        [self.overlayImage addTarget: self.overlay
+        [self.overlayImage addTarget: overlay
                    atTextureLocation: 1];
 
         self.vignetteFilter = [[GPUImageVignetteFilter alloc] init];
         
-        [self.vignetteFilter addTarget: self.overlay];
-        
         self.opacityFilter         = [[GPUImageOpacityFilter alloc] init];
         self.opacityFilter.opacity = 0.5;
-        
         [self.overlayImage addTarget: self.opacityFilter];
         [self.overlayImage processImage];
         
-        [self.overlay addTarget: self.opacityFilter];
+        [self.vignetteFilter addTarget: overlay];
+        [overlay addTarget: self.opacityFilter];
 
         [self setInitialFilters: @[self.vignetteFilter]];
         [self setTerminalFilter: self.opacityFilter];
-        
     }
     
     return self;

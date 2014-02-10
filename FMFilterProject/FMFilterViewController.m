@@ -214,11 +214,7 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
         model.attribute1Name                = filterInfo[kFirstAttributeName];
         model.attribute2Name                = filterInfo[kSecondAttributeName];
         
-        GPUImageFilterGroup<FMFilterAdjustingProtocol> *filter = [[NSClassFromString(model.className) alloc] init];
-
         [self.data addObject: model];
-        
-        [self.filters addObject: filter];
     }
     
     [self.collectionVIew reloadData];
@@ -253,11 +249,11 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
     if (self.currentSelectedIndex != indexPath.row)
     {
         FMFilterModel *model        = self.data[indexPath.row];
-        GPUImageFilterGroup<FMFilterAdjustingProtocol> *filter = self.filters[indexPath.row];
+        self.currentFilter = [[NSClassFromString(model.className) alloc] init];
 
         self.currentSelectedIndex = indexPath.row;
         
-        self.imageView.image = [filter imageByFilteringImage: self.originalImage];
+        self.imageView.image = [self.currentFilter imageByFilteringImage: self.originalImage];
         
         if (!model.attribute1Name)
         {
@@ -312,25 +308,21 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
 
 - (IBAction)slider1ValueChanged: (UISlider *)sender
 {
-    GPUImageFilterGroup<FMFilterAdjustingProtocol> *filter = self.filters[self.currentSelectedIndex];
-
-    if ([filter respondsToSelector: @selector( updateFirstFilterWithValue: )])
+    if ([self.currentFilter respondsToSelector: @selector( updateFirstFilterWithValue: )])
     {
-        [filter updateFirstFilterWithValue: sender.value];
+        [self.currentFilter updateFirstFilterWithValue: sender.value];
         
-        self.imageView.image = [filter imageByFilteringImage: self.originalImage];
+        self.imageView.image = [self.currentFilter imageByFilteringImage: self.originalImage];
     }
 }
 
 - (IBAction)slider2ValueChanged:(UISlider *)sender
 {
-    GPUImageFilterGroup<FMFilterAdjustingProtocol> *filter = self.filters[self.currentSelectedIndex];
-    
-    if ([filter respondsToSelector: @selector( updateSecondFilterWithValues: )])
+    if ([self.currentFilter respondsToSelector: @selector( updateSecondFilterWithValues: )])
     {
-        [filter updateSecondFilterWithValues: sender.value];
+        [self.currentFilter updateSecondFilterWithValues: sender.value];
 
-        self.imageView.image = [filter imageByFilteringImage: self.originalImage];
+        self.imageView.image = [self.currentFilter imageByFilteringImage: self.originalImage];
     }
 }
 

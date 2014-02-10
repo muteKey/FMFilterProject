@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong)GPUImagePicture *overlayImage;
 @property (nonatomic, strong)GPUImageMonochromeFilter *monochromeFilter;
+@property (nonatomic, strong) GPUImageOpacityFilter *opacityFilter;
 
 @end
 
@@ -24,7 +25,7 @@
     {
         UIImage *image = [UIImage imageNamed:@"stars.png"];
         self.overlayImage = [[GPUImagePicture alloc] initWithImage: image
-                                                            smoothlyScaleOutput: YES];
+                                               smoothlyScaleOutput: YES];
         
         GPUImageOverlayBlendFilter * overlay = [[GPUImageOverlayBlendFilter alloc] init];
         
@@ -32,14 +33,20 @@
                    atTextureLocation: 1];
         [self.overlayImage processImage];
 
-        self.monochromeFilter = [[GPUImageMonochromeFilter alloc] init];
-        [self.monochromeFilter setIntensity: 0.8];
+        self.monochromeFilter           = [[GPUImageMonochromeFilter alloc] init];
+        self.monochromeFilter.intensity = 0.8;
         [self.monochromeFilter addTarget: overlay];
         
-        [self addFilter: self.monochromeFilter];
+        self.opacityFilter         = [[GPUImageOpacityFilter alloc] init];
+        self.opacityFilter.opacity = 0.5;
+        
+        [self.overlayImage addTarget: self.opacityFilter];
+        [self.overlayImage processImage];
+        
+        [overlay addTarget: self.opacityFilter];
         
         [self setInitialFilters: @[self.monochromeFilter]];
-        [self setTerminalFilter: overlay];
+        [self setTerminalFilter: self.opacityFilter];
     }
 
     return self;
@@ -49,7 +56,8 @@
 
 - (void)updateFirstFilterWithValue:(CGFloat)updateValue
 {
-    // opacity
+    self.opacityFilter.opacity = updateValue;
+    [self.overlayImage processImage];
 }
 
 - (void)updateSecondFilterWithValues:(CGFloat)updateValue

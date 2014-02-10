@@ -97,7 +97,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home.jpg" width="2560" height="1600"/>
+        <image name="home.jpg" width="320" height="200"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

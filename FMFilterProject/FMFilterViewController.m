@@ -85,6 +85,15 @@ static const NSString *kSecondAttributeName     = @"kSecondAttributeName";
                                   kSecondValue          : @(0)
                                   },
                                 
+                                @{kFilterName           : @"FMFilterStripes",
+                                  kDisplayName          : @"Stripes",
+                                  kFirstAttributeName   : @"Opacity",
+                                  kSecondAttributeName  : @"Intensity",
+                                  kFirstValue           : @(0.5),
+                                  kSecondValue          : @(0.5)
+                                  },
+
+                                
                                 @{kFilterName           : @"FMFilterRedColorSplash",
                                   kDisplayName          : @"Red Color Splash",
                                   },

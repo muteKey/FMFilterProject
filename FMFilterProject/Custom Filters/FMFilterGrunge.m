@@ -36,6 +36,8 @@
         [self.overlayImage addTarget: self.opacityFilter];
         [self.overlayImage processImage];
         
+        [self.overlay addTarget: self.opacityFilter];
+        
         [self setInitialFilters: @[self.overlay]];
         [self setTerminalFilter: self.opacityFilter];
 

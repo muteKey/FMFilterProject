@@ -11,6 +11,8 @@
 @interface FMFilterStripes ()
 @property (nonatomic, strong) GPUImagePicture *overlayImage;
 @property (nonatomic, strong) GPUImageSaturationFilter *saturationFilter;
+@property (nonatomic, strong) GPUImageOpacityFilter *opacityFilter;
+
 @end
 
 @implementation FMFilterStripes
@@ -26,16 +28,21 @@
         [self.overlayImage addTarget: overlay
                    atTextureLocation: 1];
         
-        [self.overlayImage processImage];
-        
         self.saturationFilter = [[GPUImageSaturationFilter alloc] init];
         [self.saturationFilter setSaturation: 0.5];
         
-        [self addFilter: overlay];
-        [self addFilter: self.saturationFilter];
+        [self.saturationFilter addTarget: overlay];
         
-        [self setInitialFilters:@[overlay, self.saturationFilter]];
-        [self setTerminalFilter: overlay];
+        self.opacityFilter         = [[GPUImageOpacityFilter alloc] init];
+        self.opacityFilter.opacity = 0.5;
+        
+        [self.overlayImage addTarget: self.opacityFilter];
+        [self.overlayImage processImage];
+        
+        [overlay addTarget: self.opacityFilter];
+        
+        [self setInitialFilters: @[self.saturationFilter]];
+        [self setTerminalFilter: self.opacityFilter];
     }
     
     return self;
@@ -45,7 +52,8 @@
 
 - (void)updateFirstFilterWithValue: (CGFloat)updateValue
 {
-    
+    self.opacityFilter.opacity = updateValue;
+    [self.overlayImage processImage];
 }
 
 - (void)updateSecondFilterWithValues: (CGFloat)updateValue
